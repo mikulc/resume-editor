@@ -1,0 +1,362 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  #root {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* 隐藏滚动条，保留滚动功能 */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .resume-paper {
+    width: 210mm;
+    min-height: 297mm;
+    background: #ffffff;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 20mm;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #111827;
+    /* 强制换行：解决纯数字/无空格长文本溢出容器 */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    /* 打印时强制分页 */
+    page-break-after: always;
+  }
+
+  /* 最后一页不需要分页符 */
+  .resume-paper:last-child {
+    page-break-after: auto;
+  }
+
+  /* 简历纸内所有文本元素强制换行 */
+  .resume-paper * {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #DBEAFE;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .section-header-bar {
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background-color: #3B82F6;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .a4-scale-container {
+    transform-origin: top center;
+    width: 210mm;
+  }
+}
+
+/* ================================================================
+   Save Status Indicator — 呼吸灯动画系统
+   实现自然柔和的多状态呼吸灯效果：
+   - saved:  绿色呼吸，4s 周期模拟人类呼吸节奏（吸→屏→呼→停）
+   - saving: 蓝色呼吸，1.2s 快速脉冲表示进行中
+   - error:  红色呼吸，1s 急促脉冲吸引注意
+   ================================================================ */
+
+/*
+ * 已保存呼吸灯（绿色）
+ * 4 秒完整呼吸周期，模拟自然呼吸：
+ *   0%-40%  吸入（opacity ↑, scale ↑, glow ↑）
+ *   40%-50% 屏息（峰值保持）
+ *   50%-90% 呼出（opacity ↓, scale ↓, glow ↓）
+ *   90%-100% 停顿（谷底静止）
+ */
+@keyframes breathe-saved {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.85);
+    box-shadow:
+      0 0 2px rgba(34, 197, 94, 0.15),
+      0 0 4px rgba(34, 197, 94, 0.05);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.18);
+    box-shadow:
+      0 0 4px rgba(34, 197, 94, 0.45),
+      0 0 12px rgba(34, 197, 94, 0.2);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+    box-shadow:
+      0 0 4px rgba(34, 197, 94, 0.45),
+      0 0 12px rgba(34, 197, 94, 0.2);
+  }
+  90% {
+    opacity: 0.4;
+    transform: scale(0.85);
+    box-shadow:
+      0 0 2px rgba(34, 197, 94, 0.15),
+      0 0 4px rgba(34, 197, 94, 0.05);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(0.85);
+    box-shadow:
+      0 0 2px rgba(34, 197, 94, 0.15),
+      0 0 4px rgba(34, 197, 94, 0.05);
+  }
+}
+
+/*
+ * 保存中呼吸灯（蓝色）
+ * 1.2s 快速循环，营造"工作中"的节奏感
+ */
+@keyframes breathe-saving {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+    box-shadow:
+      0 0 3px rgba(59, 130, 246, 0.25),
+      0 0 6px rgba(59, 130, 246, 0.08);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow:
+      0 0 6px rgba(59, 130, 246, 0.55),
+      0 0 16px rgba(59, 130, 246, 0.25);
+  }
+}
+
+/*
+ * 保存失败呼吸灯（红色警告）
+ * 1s 急促脉冲，吸引用户注意
+ */
+@keyframes breathe-error {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+    box-shadow:
+      0 0 3px rgba(239, 68, 68, 0.25),
+      0 0 6px rgba(239, 68, 68, 0.08);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow:
+      0 0 6px rgba(239, 68, 68, 0.55),
+      0 0 16px rgba(239, 68, 68, 0.25);
+  }
+}
+
+/* ---- 呼吸灯 CSS 类名 ---- */
+.breathing-dot-saved {
+  animation: breathe-saved 4s ease-in-out infinite;
+}
+
+.breathing-dot-saving {
+  animation: breathe-saving 1.2s ease-in-out infinite;
+}
+
+.breathing-dot-error {
+  animation: breathe-error 1s ease-in-out infinite;
+}
+
+/* ---- 保存完成瞬间确认脉冲（叠加在持续呼吸之上） ---- */
+@keyframes pulse-confirm {
+  0% {
+    transform: scale(var(--breath-scale, 1));
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+  }
+  50% {
+    transform: scale(1.5);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    transform: scale(var(--breath-scale, 1));
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.breathing-dot-confirm {
+  animation: pulse-confirm 0.6s ease-out;
+}
+
+/* ===== 悬浮加粗工具栏样式 ===== */
+.floating-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  padding: 4px 6px;
+  animation: toolbar-appear 0.15s ease-out;
+  user-select: none;
+}
+
+.floating-toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.floating-toolbar-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #1f2937;
+}
+
+.floating-toolbar-btn:active {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
+}
+
+@keyframes toolbar-appear {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* 打印时隐藏悬浮工具栏 */
+  .floating-toolbar {
+    display: none !important;
+  }
+
+  .resume-paper {
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 确保粗体和斜体在打印时正常显示 */
+  .resume-paper strong {
+    font-weight: 700 !important;
+  }
+  .resume-paper em {
+    font-style: italic !important;
+  }
+}
+
+/* ===== 三点下拉菜单动画 ===== */
+@keyframes dropdown-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== 抽屉遮罩动画 ===== */
+.drawer-overlay {
+  background: rgba(0, 0, 0, 0.15);
+  transition: opacity 300ms ease;
+}
+
+.drawer-overlay-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== Toast 通知动画 ===== */
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.toast-enter {
+  animation: toast-enter 0.25s ease-out;
+}
+
+/* ===== ConfirmModal 动画 ===== */
+@keyframes modal-backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-dialog-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-backdrop-enter {
+  animation: modal-backdrop-enter 0.2s ease-out;
+}
+
+.modal-dialog-enter {
+  animation: modal-dialog-enter 0.2s ease-out;
+}
