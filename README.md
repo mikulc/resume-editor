@@ -1,6 +1,7 @@
 # 📝 在线简历编辑器
 
 一个纯前端、零依赖后端的在线简历编辑工具，提供实时编辑预览、Markdown 富文本排版、多主题切换和高保真 PDF 导出。
+<img width="2880" height="1505" alt="Snipaste_2026-05-28_09-25-21" src="https://github.com/user-attachments/assets/b625169c-fb7e-4eb0-86cc-d0d3d8cc5ae6" />
 
 > 💡 **提示**：纯浏览器端应用，所有数据存储在浏览器 localStorage 中，无后端服务。
 
