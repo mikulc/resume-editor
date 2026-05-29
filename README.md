@@ -42,39 +42,39 @@
 
 ---
 
-## 技术栈
+## 🛠️ 技术栈
 
 | 技术 | 版本 | 说明 |
 |------|------|------|
-| [React](https://react.dev/) | ^18.3 | 前端 UI 框架 |
-| [TypeScript](https://www.typescriptlang.org/) | ~5.6 | 类型安全 |
-| [Vite](https://vitejs.dev/) | ^5.4 | 构建工具 |
-| [Tailwind CSS](https://tailwindcss.com/) | ^3.4 | 原子化 CSS 框架 |
-| [jsPDF](https://github.com/parallax/jsPDF) | ^2.5 | PDF 生成 |
-| [@zumer/snapdom](https://github.com/zumerlab/snapdom) | ^2.12 | DOM 截图 |
-| [Lucide React](https://lucide.dev/) | ^0.468 | 图标库 |
-| [uuid](https://github.com/uuidjs/uuid) | ^10.0 | 唯一 ID 生成 |
-| [tailwind-merge](https://github.com/dcastil/tailwind-merge) | ^2.5 | Tailwind 类名合并 |
-| [tailwindcss-animate](https://github.com/jamiebuilds/tailwindcss-animate) | ^1.0 | Tailwind 动画插件 |
+| ⚛️ [React](https://react.dev/) | ^18.3 | 前端 UI 框架 |
+| 🔷 [TypeScript](https://www.typescriptlang.org/) | ~5.6 | 类型安全 |
+| ⚡ [Vite](https://vitejs.dev/) | ^5.4 | 构建工具 |
+| 🎨 [Tailwind CSS](https://tailwindcss.com/) | ^3.4 | 原子化 CSS 框架 |
+| 📄 [jsPDF](https://github.com/parallax/jsPDF) | ^2.5 | PDF 生成 |
+| 📸 [@zumer/snapdom](https://github.com/zumerlab/snapdom) | ^2.12 | DOM 截图 |
+| 🎯 [Lucide React](https://lucide.dev/) | ^0.468 | 图标库 |
+| 🔑 [uuid](https://github.com/uuidjs/uuid) | ^10.0 | 唯一 ID 生成 |
+| 🔗 [tailwind-merge](https://github.com/dcastil/tailwind-merge) | ^2.5 | Tailwind 类名合并 |
+| ✨ [tailwindcss-animate](https://github.com/jamiebuilds/tailwindcss-animate) | ^1.0 | Tailwind 动画插件 |
 
-**状态管理**：React Context + useReducer，无第三方状态管理库。
+🗄️ **状态管理**：React Context + useReducer，无第三方状态管理库。
 
 ---
 
-## 快速开始
+## 🚀 快速开始
 
-### 环境要求
+### 📋 环境要求
 
-- [Node.js](https://nodejs.org/) >= 18
-- [pnpm](https://pnpm.io/) >= 8（推荐）或 npm / yarn
+- 🟢 [Node.js](https://nodejs.org/) >= 18
+- 📦 [pnpm](https://pnpm.io/) >= 8（推荐）或 npm / yarn
 
-### 安装依赖
+### 📥 安装依赖
 
 ```bash
 pnpm install
 ```
 
-### 本地开发
+### 💻 本地开发
 
 ```bash
 pnpm dev
@@ -82,7 +82,7 @@ pnpm dev
 
 启动后访问 [http://localhost:5173](http://localhost:5173)。
 
-### 构建生产版本
+### 🔨 构建生产版本
 
 ```bash
 pnpm build
@@ -90,7 +90,7 @@ pnpm build
 
 构建产物输出到 `dist/` 目录。
 
-### 预览生产构建
+### 👁️ 预览生产构建
 
 ```bash
 pnpm preview
@@ -98,20 +98,20 @@ pnpm preview
 
 ---
 
-## 使用说明
+## 📖 使用说明
 
-1. 在**左侧编辑面板**点击模块标题展开编辑区域，填写个人信息及各模块内容
-2. 在**中间预览区**实时查看 A4 纸张渲染效果
-3. 预览区选中文本可弹出悬浮工具栏，一键加粗/斜体/清除格式
-4. 点击要点旁边的「三点菜单」→「编辑」，打开抽屉编辑器进行详细编辑（支持局部撤销）
-5. 在**右侧设置面板**切换主题颜色、调整页边距、行间距、水印等样式
-6. 点击预览区顶部的「导出 PDF」按钮保存为 PDF 文件
-7. 使用 **Ctrl+Z / Ctrl+Y** 全局撤销/重做操作
-8. 使用 **Ctrl+S** 手动保存数据到浏览器
+1. 📝 在**左侧编辑面板**点击模块标题展开编辑区域，填写个人信息及各模块内容
+2. 👁️ 在**中间预览区**实时查看 A4 纸张渲染效果
+3. 🎨 预览区选中文本可弹出悬浮工具栏，一键加粗/斜体/清除格式
+4. ✏️ 点击要点旁边的「三点菜单」→「编辑」，打开抽屉编辑器进行详细编辑（支持局部撤销）
+5. ⚙️ 在**右侧设置面板**切换主题颜色、调整页边距、行间距、水印等样式
+6. 📥 点击预览区顶部的「导出 PDF」按钮保存为 PDF 文件
+7. ↩️ 使用 **Ctrl+Z / Ctrl+Y** 全局撤销/重做操作
+8. 💾 使用 **Ctrl+S** 手动保存数据到浏览器
 
 ---
 
-## 项目结构
+## 📂 项目结构
 
 ```
 resume-editor/
@@ -163,9 +163,9 @@ resume-editor/
 
 ---
 
-## 架构设计
+## 🏗️ 架构设计
 
-### 数据流
+### 🔄 数据流
 
 ```
 用户操作 → dispatch(Action) → resumeReducer → 新 ResumeData
@@ -177,25 +177,25 @@ resume-editor/
                           预览组件重新渲染 → 实时反馈
 ```
 
-### 状态管理
+### 🗃️ 状态管理
 
 - **ResumeContext** — 简历数据状态 (`ResumeData`)，通过 `useReducer` 管理，共 18 种 Action（增删改查各模块）
 - **HistoryContext** — 撤销/重做，内置于 `ResumeProvider`，`useEffect` 自动监听数据变更并推入历史栈
 - **AppUIContext** — UI 状态 (`AppUIState`)，管理当前展开模块、缩放比例、主题设置、保存状态等
 
-### Markdown 渲染
+### 📝 Markdown 渲染
 
 - **解析**：`parseBoldFragments()` 按优先级 `***` → `**` → `*` 解析文本为带样式的片段数组
 - **偏移映射**：`buildOffsetMap()` 遍历 DOM 构建"渲染偏移 → 源文本偏移"映射，确保在含标记的源文本中精确定位
 - **格式操作**：基于偏移量的精准插入/删除标记，避免重复文字导致的错位问题
 
-### PDF 导出流程
+### 📄 PDF 导出流程
 
 ```
 预览区 A4 DOM → @zumer/snapdom 逐页截图（JPEG）→ Canvas 转 DataURL → jsPDF 添加页面 → 下载 PDF
 ```
 
-### 动画系统
+### 🎬 动画系统
 
 在 `tailwind.config.js` 中注册 4 套关键帧动画，配合 `tailwindcss-animate` 插件使用：
 - `animate-breathe-saved` — 保存成功，绿色 4s 呼吸灯
@@ -205,21 +205,21 @@ resume-editor/
 
 ---
 
-## 快捷键
+## ⌨️ 快捷键
 
 | 快捷键 | 作用 |
 |--------|------|
-| Ctrl+Z | 全局撤销 |
-| Ctrl+Y | 全局重做 |
-| Ctrl+S | 手动保存 |
-| Ctrl+滚轮 | 预览区缩放 |
-| ESC | 关闭三点菜单 / 关闭抽屉编辑器 |
+| ↩️ Ctrl+Z | 全局撤销 |
+| ↪️ Ctrl+Y | 全局重做 |
+| 💾 Ctrl+S | 手动保存 |
+| 🔍 Ctrl+滚轮 | 预览区缩放 |
+| ❌ ESC | 关闭三点菜单 / 关闭抽屉编辑器 |
 
-> 注意：当要点抽屉编辑器打开时，Ctrl+Z/Y 作用于抽屉内部的局部历史栈，而非全局。
+> ⚠️ 注意：当要点抽屉编辑器打开时，Ctrl+Z/Y 作用于抽屉内部的局部历史栈，而非全局。
 
 ---
 
-## 开发说明
+## 📝 开发说明
 
 - 数据流基于 **React Context + useReducer**，无外部状态管理依赖
 - 全局状态定义在 `src/context/ResumeContext.tsx`
@@ -232,6 +232,6 @@ resume-editor/
 
 ---
 
-## License
+## 📄 License
 
 MIT
